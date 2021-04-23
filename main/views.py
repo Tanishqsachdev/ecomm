@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+from .forms import AddressForm
 
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.views.generic.base import TemplateView
@@ -32,6 +33,10 @@ class UserSignUp(UserPassesTestMixin,CreateView):
 class UserLogout(LogoutView):
     next_page='home'
 
+class AddAddress(CreateView):
+    template_name='main/add_address.html'
+    form_class = AddressForm
+    success_url = reverse_lazy('home')
     
 
 
