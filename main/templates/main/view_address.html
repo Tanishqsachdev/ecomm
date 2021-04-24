@@ -1,0 +1,15 @@
+<h1>Address</h1>
+
+
+{% for add  in address %}
+<div>
+<h4>{{ add.house_number }}</h4>
+<h4>{{ add.street_name }}</h4>
+<h4>{{ add.locality }}</h4>
+<h4>{{ add.city }}</h4>
+<h4>{{ add.state }}</h4>
+<h4>{{ add.pincode }}</h4>
+</div>
+{% endfor %}
+
+<a href=" {% url 'add_address' %}" class="btn btn-success"><button>+</button></a>
