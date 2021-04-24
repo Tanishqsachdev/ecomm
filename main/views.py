@@ -3,7 +3,9 @@ from django.urls import reverse_lazy
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from .forms import AddressForm
+from .models import Address
 
+from django.views.generic import ListView
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.views.generic.base import TemplateView
 from django.contrib.auth.views import LoginView, LogoutView
@@ -36,7 +38,17 @@ class UserLogout(LogoutView):
 class AddAddress(CreateView):
     template_name='main/add_address.html'
     form_class = AddressForm
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('view_address')
+
+class ViewAddress(ListView):
+    template_name='main/view_address.html'
+    context_object_name='address'
+    model=Address
+
     
+    def get_queryset(self):
+        queryset = Address.objects.filter(user=self.request.user)
+        return queryset
+
 
 

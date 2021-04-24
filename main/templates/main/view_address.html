@@ -1,3 +1,6 @@
+{% extends 'main/base.html' %}
+
+{% block body %}
 <h1>Address</h1>
 
 
@@ -12,4 +15,5 @@
 </div>
 {% endfor %}
 
-<a href=" {% url 'add_address' %}" class="btn btn-success"><button>+</button></a>
+<a href=" {% url 'add_address' %}" class="btn btn-success">+</a>
+{% endblock body %}

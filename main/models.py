@@ -1,8 +1,12 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.contrib.auth.models import User
 
 # Create your models here.
+DEFAULT_ID =1
+
 class Address(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE,default=DEFAULT_ID)
     building_number = models.CharField(max_length=20)
     street_name = models.CharField(max_length=20)
     locality = models.CharField(max_length=20)

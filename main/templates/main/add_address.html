@@ -1,3 +1,6 @@
+{% extends 'main/base.html' %}
+
+{% block body %}
 <h1> Add Address </h1>
 
 <form method='POST'>
@@ -5,3 +8,4 @@
 {{form.as_p}}
 <input type='submit' name='Add' value='submit'>
 </form>
+{% endblock body %}
