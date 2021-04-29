@@ -3,7 +3,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from .forms import AddressForm, AddProductForm
-from .models import Address
+from .models import Address,Product
 
 from django.views.generic import ListView
 from django.contrib.auth.mixins import UserPassesTestMixin
@@ -12,8 +12,10 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.views.generic.edit  import CreateView
 
 # Create your views here.
-class Home(TemplateView):
+class Home(ListView):
     template_name='main/index.html'
+    context_object_name='products'
+    model=Product
 
 class UserLogin(LoginView):
     template_name='main/login.html'
