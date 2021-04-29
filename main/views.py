@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from .forms import AddressForm
+from .forms import AddressForm, AddProductForm
 from .models import Address
 
 from django.views.generic import ListView
@@ -50,5 +50,8 @@ class ViewAddress(ListView):
         queryset = Address.objects.filter(user=self.request.user)
         return queryset
 
-
+class AddProducts(CreateView):
+    template_name='main/add_products.html'
+    form_class= AddProductForm
+    success_url = reverse_lazy('home')
 

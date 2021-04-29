@@ -16,6 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from main.views import *
+from django.conf.urls.static import static
+from django.conf import settings
+
+admin.site.site_header = "Admin"
+admin.site.site_title = "Admin Portal"
+admin.site.index_title = "Welcome to Admin Portal"
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', Home.as_view(),name='home'),
@@ -23,6 +30,8 @@ urlpatterns = [
     path('signup/', UserSignUp.as_view(),name='signup'),
     path('logout', UserLogout.as_view(),name='logout'),
     path('address/add', AddAddress.as_view(),name='add_address'),
+    path('admin/products/add', AddProducts.as_view(),name='add_products'),
     path('address', ViewAddress.as_view(),name='view_address'),
     
 ]
+urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
