@@ -32,6 +32,7 @@ urlpatterns = [
     path('address/add', AddAddress.as_view(),name='add_address'),
     path('admin/products/add', AddProducts.as_view(),name='add_products'),
     path('address', ViewAddress.as_view(),name='view_address'),
+    path('details/<pk>', ViewDetails.as_view(),name='view_details'),
     
 ]
 urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

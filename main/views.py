@@ -5,7 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 from .forms import AddressForm, AddProductForm
 from .models import Address,Product
 
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.views.generic.base import TemplateView
 from django.contrib.auth.views import LoginView, LogoutView
@@ -56,4 +56,10 @@ class AddProducts(CreateView):
     template_name='main/add_products.html'
     form_class= AddProductForm
     success_url = reverse_lazy('home')
+
+class ViewDetails(DetailView):
+    model= Product
+    template_name='main/detail.html'
+    context_object_name = 'product'
+
 
