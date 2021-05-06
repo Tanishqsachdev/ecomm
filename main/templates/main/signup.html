@@ -1,13 +1,24 @@
 {% extends 'main/base.html' %}
 {% block body %}
-<h1>Signup</h1>
 
-<form action="" method="POST">
-{% csrf_token %}
-{{form.as_p}}
-<input type="submit" name="Sign up" value="submit">
-</form>
-<div>
-</div>
+ <h2 align='center'>Sign up</h2>
+    <div align='center'>
+  <form method="POST" style='display:container;' >
+    {% csrf_token %}
+      {% for field in form %}
+      <table>
+        <tr>
+        {{ field.label_tag }}<br>
+        </tr>
+        <tr>
+        {{ field }}
+        </tr>
+        {% for error in field.errors %}
+          <p style="color: red">{{ error }}</p>
+        {% endfor %}
+      </p>
+      {% endfor %}    <button type="submit" class='btn-primary'>Sign up</button>
+  </form>
+  </div>
 
 {% endblock body %}
