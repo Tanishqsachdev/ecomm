@@ -127,3 +127,5 @@ STATICFILES_DIRS =[
 LOGIN_URL ='login'
 MEDIA_ROOT =  BASE_DIR/'static/products'
 MEDIA_URL = '/media/'
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+

@@ -36,3 +36,8 @@ class Product(models.Model):
     product_available = models.BooleanField(default=True)
     date_added = models.DateField(auto_now_add=True)
 
+class Cart(models.Model):
+    product_id = models.ForeignKey(Product,on_delete=models.CASCADE)
+    quantity = models.IntegerField()
+    created_at = models.DateField(auto_now_add=True)
+    modified_at = models.DateTimeField(auto_now=True)
