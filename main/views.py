@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from .forms import AddressForm, AddProductForm
+from .forms import AddressForm, AddProductForm,SignupForm
 from .models import Address,Product
 
 from django.views.generic import ListView, DetailView
@@ -26,7 +26,7 @@ class UserLogin(LoginView):
 
 class UserSignUp(UserPassesTestMixin,CreateView):
     template_name='main/signup.html'
-    form_class = UserCreationForm
+    form_class = SignupForm
     success_url = reverse_lazy('home')
     
     def test_func(self):
