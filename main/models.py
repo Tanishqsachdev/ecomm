@@ -49,5 +49,5 @@ class Order(models.Model):
     ordered = models.BooleanField(default=False)
 
     def __str__(self):
-        return f"{self.user.username} ordered {self.items.item.all()}"
+        return f"{self.user.username} ordered {[i.item.product_name for i in self.items.all()]}"
     

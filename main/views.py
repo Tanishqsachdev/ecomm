@@ -1,11 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect,get_object_or_404
+from django.contrib import messages
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from .forms import AddressForm, AddProductForm,SignupForm
-from .models import Address,Product
+from .models import Address,Product,OrderItem,Order
+from django.utils import timezone
 
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView,View
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.views.generic.base import TemplateView
 from django.contrib.auth.views import LoginView, LogoutView
@@ -62,4 +64,28 @@ class ViewDetails(DetailView):
     template_name='main/detail.html'
     context_object_name = 'product'
 
+class AddToCart(View):
+
+    def get(self, *args, **kwargs):
+        item = get_object_or_404(Product,pk=self.kwargs['pk'])
+        order_item,is_new = OrderItem.objects.get_or_create(item=item,user=self.request.user,ordered=False)
+
+        pending_order = Order.objects.filter(user=self.request.user,ordered=False)
+        
+        if pending_order.exists():
+            order = pending_order[0]
+
+            if order.items.filter(item__pk=self.kwargs['pk']).exists():
+                order_item.quantity+=1
+                order_item.save()
+                messages.info(self.request,'item added to the cart')
+                return redirect('view_details',pk = self.kwargs['pk'])
+            else:
+                order.items.add(order_item)
+                messages.info(self.request,'item added to the cart')
+                return redirect('view_details',pk = self.kwargs['pk'])
+        else:
+            order = Order.objects.create(user=self.request.user)
+            messages.info(self.request,'item added to the cart')
+            return redirect('view_details',pk = self.kwargs['pk'])
 
