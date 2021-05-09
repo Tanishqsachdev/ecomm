@@ -36,8 +36,18 @@ class Product(models.Model):
     product_available = models.BooleanField(default=True)
     date_added = models.DateField(auto_now_add=True)
 
-class Cart(models.Model):
-    product_id = models.ForeignKey(Product,on_delete=models.CASCADE)
-    quantity = models.IntegerField()
-    created_at = models.DateField(auto_now_add=True)
-    modified_at = models.DateTimeField(auto_now=True)
+class OrderItem(models.Model):
+    user = models.ForeignKey(User,on_delete=models.SET_NULL,null=True)
+    ordered = models.BooleanField(default=False)
+    item = models.ForeignKey(Product,on_delete=models.SET_NULL,null=True)
+    quantity = models.IntegerField(default=1)
+
+class Order(models.Model):
+    user  = models.ForeignKey(User,on_delete=models.SET_NULL,null=True)
+    items = models.ManyToManyField(OrderItem)
+    created_at = models.DateField()
+    ordered = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.user.username} ordered {self.items.item.all()}"
+    
