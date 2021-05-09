@@ -45,7 +45,7 @@ class OrderItem(models.Model):
 class Order(models.Model):
     user  = models.ForeignKey(User,on_delete=models.SET_NULL,null=True)
     items = models.ManyToManyField(OrderItem)
-    created_at = models.DateField()
+    order_placed = models.DateTimeField(null=True,blank=True)
     ordered = models.BooleanField(default=False)
 
     def __str__(self):
