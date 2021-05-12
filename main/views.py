@@ -1,5 +1,7 @@
+from typing import get_origin
 from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib import messages
+from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
@@ -78,14 +80,41 @@ class AddToCart(View):
             if order.items.filter(item__pk=self.kwargs['pk']).exists():
                 order_item.quantity+=1
                 order_item.save()
-                messages.info(self.request,'item added to the cart')
-                return redirect('view_details',pk = self.kwargs['pk'])
+                # messages.info(self.request,'item added to the cart')
+                return redirect('view_cart')
             else:
                 order.items.add(order_item)
-                messages.info(self.request,'item added to the cart')
-                return redirect('view_details',pk = self.kwargs['pk'])
+                # messages.info(self.request,'item added to the cart')
+                return redirect('view_cart')
         else:
             order = Order.objects.create(user=self.request.user)
-            messages.info(self.request,'item added to the cart')
-            return redirect('view_details',pk = self.kwargs['pk'])
+            # messages.info(self.request,'item added to the cart')
+            return redirect('view_cart')
+
+class ReduceFromCart(View):
+    def get(self,*args,**kwargs):
+        item = get_object_or_404(Product,pk=self.kwargs['pk'])
+        pending_order = Order.objects.filter(user=self.request.user,ordered=False)
+
+        if pending_order.exists():
+            order = pending_order[0]
+            order_item  = order.items.filter(item__pk=self.kwargs['pk'])
+            if order_item.exists():
+                return redirect('home')
+            else:
+                quant = order_item[0].quantity
+                if quant>0:
+                    order_item[0].quantity -=1
+                    order_item[0].save()
+                    return redirect('view_cart')
+                else:
+                    return redirect('home')
+
+
+
+
+class ViewCart(ListView):
+    model=OrderItem
+    template_name='main/cart.html'
+    context_object_name='items'
 
