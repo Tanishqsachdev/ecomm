@@ -112,8 +112,22 @@ class ReduceFromCart(View):
                 else:
                     return redirect('home')
 
+class DeleteFromCart(View):
+    def get(self,*args,**kwargs):
+        item = get_object_or_404(Product,pk=self.kwargs['pk'])
+        pending_order = Order.objects.filter(user=self.request.user,ordered=False)
 
-
+        if pending_order.exists():
+            order = pending_order[0]
+            item_exist  = order.items.filter(item__pk=self.kwargs['pk'])
+            if item_exist.exists():
+                order_item = OrderItem.objects.get(item =item,user=self.request.user,ordered=False)
+                order_item.delete()
+                return redirect('view_cart')
+            else:
+                return redirect('home')
+        else:
+            return redirect('home')
 
 class ViewCart(ListView):
     model=OrderItem

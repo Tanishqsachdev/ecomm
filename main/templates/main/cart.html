@@ -98,7 +98,7 @@
                       <td class="align-middle border-0">
                         <p class="mb-0 small">$250</p>
                       </td>
-                      <td class="align-middle border-0"><a class="reset-anchor" href="#"><i class="fas fa-trash-alt small text-muted"></i></a></td>
+                      <td class="align-middle border-0"><a class="reset-anchor" href="{% url 'cart_del' item.item.pk %}"><i class="fas fa-trash-alt small text-muted"></i></a></td>
                     </tr>
                   {% endfor %}
                   </tbody>
