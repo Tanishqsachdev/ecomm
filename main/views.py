@@ -98,14 +98,16 @@ class ReduceFromCart(View):
 
         if pending_order.exists():
             order = pending_order[0]
-            order_item  = order.items.filter(item__pk=self.kwargs['pk'])
-            if order_item.exists():
-                return redirect('home')
-            else:
-                quant = order_item[0].quantity
-                if quant>0:
-                    order_item[0].quantity -=1
-                    order_item[0].save()
+            item_exist  = order.items.filter(item__pk=self.kwargs['pk'])
+            if item_exist.exists():
+                order_item = OrderItem.objects.get(item =item,user=self.request.user,ordered=False)
+                quant = order_item.quantity
+                if quant==1:
+                    order_item.delete()
+                    return redirect('home')
+                elif quant>0:
+                    order_item.quantity -=1
+                    order_item.save()
                     return redirect('view_cart')
                 else:
                     return redirect('home')
