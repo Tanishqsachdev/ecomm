@@ -7,6 +7,10 @@ DEFAULT_ID =1
 
 class Address(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE,default=DEFAULT_ID)
+    fname = models.CharField(max_length=20)
+    lname = models.CharField(max_length=20)
+    email = models.EmailField()
+    phone_number = models.PositiveBigIntegerField(validators=[MinValueValidator(1000000000)])
     building_number = models.CharField(max_length=20)
     street_name = models.CharField(max_length=20)
     locality = models.CharField(max_length=20)
