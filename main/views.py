@@ -1,4 +1,5 @@
 from typing import get_origin
+from django.contrib.auth import models
 from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib import messages
 from django.http import HttpResponse
@@ -130,7 +131,10 @@ class DeleteFromCart(View):
             return redirect('home')
 
 class ViewCart(ListView):
-    model=OrderItem
     template_name='main/cart.html'
-    context_object_name='items'
+    context_object_name='order'
+    
+
+    def get_queryset(self):
+        return Order.objects.get(user=self.request.user, ordered=False)
 

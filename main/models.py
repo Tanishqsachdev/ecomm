@@ -42,6 +42,9 @@ class OrderItem(models.Model):
     item = models.ForeignKey(Product,on_delete=models.SET_NULL,null=True)
     quantity = models.IntegerField(default=1)
 
+    def item_total(self):
+        return self.item.product_price * self.quantity
+
 class Order(models.Model):
     user  = models.ForeignKey(User,on_delete=models.SET_NULL,null=True)
     items = models.ManyToManyField(OrderItem)
@@ -50,4 +53,10 @@ class Order(models.Model):
 
     def __str__(self):
         return f"{self.user.username} ordered {[i.item.product_name for i in self.items.all()]}"
+    
+    def get_total(self):
+        total = 0
+        for item in self.items.all():
+            total+= item.item_total()
+        return total
     

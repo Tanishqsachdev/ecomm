@@ -76,10 +76,10 @@
                     </tr>
                   </thead>
                   <tbody>
-                  {% for item in items  %}
+                  {% for item in order.items.all  %}
                     <tr>
                       <th class="pl-0 border-0" scope="row">
-                        <div class="media align-items-center"><a class="reset-anchor d-block animsition-link" href="detail.html"><img src="{% static 'img/product-detail-3.jpg' %}" alt="..." width="70"/></a>
+                        <div class="media align-items-center"><a class="reset-anchor d-block animsition-link" href="detail.html"><img src="{{ item.item.product_image.url }}" alt="..." width="70"/></a>
                           <div class="media-body ml-3"><strong class="h6"><a class="reset-anchor animsition-link" href="detail.html">{{item.item.product_name}}</a></strong></div>
                         </div>
                       </th>
@@ -96,7 +96,7 @@
                         </div>
                       </td>
                       <td class="align-middle border-0">
-                        <p class="mb-0 small">$250</p>
+                        <p class="mb-0 small">{{item.item_total}}</p>
                       </td>
                       <td class="align-middle border-0"><a class="reset-anchor" href="{% url 'cart_del' item.item.pk %}"><i class="fas fa-trash-alt small text-muted"></i></a></td>
                     </tr>
@@ -118,9 +118,9 @@
                 <div class="card-body">
                   <h5 class="text-uppercase mb-4">Cart total</h5>
                   <ul class="list-unstyled mb-0">
-                    <li class="d-flex align-items-center justify-content-between"><strong class="text-uppercase small font-weight-bold">Subtotal</strong><span class="text-muted small">$250</span></li>
+                    <li class="d-flex align-items-center justify-content-between"><strong class="text-uppercase small font-weight-bold">Subtotal</strong><span class="text-muted small">₹{{order.get_total}}</span></li>
                     <li class="border-bottom my-2"></li>
-                    <li class="d-flex align-items-center justify-content-between mb-4"><strong class="text-uppercase small font-weight-bold">Total</strong><span>$250</span></li>
+                    <li class="d-flex align-items-center justify-content-between mb-4"><strong class="text-uppercase small font-weight-bold">Total</strong><span>₹{{order.get_total}}</span></li>
                     <li>
                       <form action="#">
                         <div class="form-group mb-0">
