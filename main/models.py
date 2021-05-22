@@ -10,16 +10,15 @@ class Address(models.Model):
     fname = models.CharField(max_length=20)
     lname = models.CharField(max_length=20)
     email = models.EmailField()
-    phone_number = models.PositiveBigIntegerField(validators=[MinValueValidator(1000000000)])
-    building_number = models.CharField(max_length=20)
-    street_name = models.CharField(max_length=20)
-    locality = models.CharField(max_length=20)
+    phone_number = models.CharField(max_length=10)
+    pincode = models.CharField(max_length=6)
+    add1 = models.CharField(max_length=20)
+    add2 = models.CharField(max_length=20)
     city = models.CharField(max_length=20)
     state = models.CharField(max_length=20)
-    pincode = models.PositiveIntegerField(validators=[MinValueValidator(100000),MaxValueValidator(999999)])
 
     def __str__(self):
-        return self.building_number
+        return f"{self.user} @ {self.pincode}"
 
 class ProductCategory(models.Model):
     name = models.CharField(max_length=100)
@@ -54,6 +53,8 @@ class Order(models.Model):
     items = models.ManyToManyField(OrderItem)
     order_placed = models.DateTimeField(null=True,blank=True)
     ordered = models.BooleanField(default=False)
+    delivery_address = models.ForeignKey(Address,on_delete=models.CASCADE,default=None,null=True)
+    delivered = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.user.username} ordered {[i.item.product_name for i in self.items.all()]}"
