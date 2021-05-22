@@ -1,0 +1,23 @@
+{% extends 'main/base.html' %}
+
+{% block body %}
+<h1>Address</h1>
+
+<form method="POST" action="{% url 'order '%}">
+{% for add  in address %}
+{% csrf_token %}
+<div>
+<input type="radio" name="address" value="{{ add.pk}}">
+<h4>{{ add.fname }} {{ add.lname }} </h4>
+<h4>{{ add.email }}</h4>
+<h4>{{ add.add1 }}</h4>
+<h4>{{ add.add2 }}</h4>
+<h4>{{ add.city }} {{ add.pincode }}</h4>
+<h4>{{ add.state }}</h4>
+<br>
+</div>
+{% endfor %}
+<a href=" {% url 'add_address' %}" class="btn btn-success" style="margin:5px;">+</a>
+<br><input class="btn btn-success" type="submit" name="order" value="submit"><br>
+</form>
+{% endblock body %}
