@@ -37,6 +37,8 @@ urlpatterns = [
     path('cart/add/<pk>', AddToCart.as_view(),name='cart_add'),
     path('cart/red/<pk>', ReduceFromCart.as_view(),name='cart_red'),
     path('cart/del/<pk>', DeleteFromCart.as_view(),name='cart_del'),
+    path('checkout/', Checkout.as_view(),name='checkout'),
+    
     
 ]
 urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

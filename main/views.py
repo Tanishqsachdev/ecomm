@@ -138,3 +138,20 @@ class ViewCart(ListView):
     def get_queryset(self):
         return Order.objects.get(user=self.request.user, ordered=False)
 
+class Checkout(View):
+    def get(self,*args, **kwargs):
+        addresses = Address.objects.filter(user=self.request.user)
+        if addresses:
+            return render(self.request,'main/checkout_address.html',{"address":addresses})
+        else:
+            form = AddressForm()
+            return render(self.request,'main/checkout.html',{"form":form})
+
+    def post(self,*args, **kwargs):
+        post_data = self.request.POST
+        form = AddressForm(post_data)
+        form.user = self.request.user
+        if form.is_valid():
+            form.save()
+        return redirect("checkout")
+
