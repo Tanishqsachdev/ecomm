@@ -89,6 +89,7 @@ class AddToCart(View):
                 return redirect('view_cart')
         else:
             order = Order.objects.create(user=self.request.user)
+            order.items.add(order_item)
             # messages.info(self.request,'item added to the cart')
             return redirect('view_cart')
 
@@ -136,7 +137,8 @@ class ViewCart(ListView):
     
 
     def get_queryset(self):
-        return Order.objects.get(user=self.request.user, ordered=False)
+        order, isnew = Order.objects.get_or_create(user=self.request.user, ordered=False)
+        return order
 
 class Checkout(View):
     def get(self,*args, **kwargs):
