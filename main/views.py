@@ -164,6 +164,7 @@ class OrderView(View):
         if address:
             order.delivery_address = address
             order.ordered = True
+            order.order_placed = timezone.now()
             order.save()
             for item in order.items.all():
                 item.ordered =True
