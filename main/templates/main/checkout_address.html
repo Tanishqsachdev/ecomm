@@ -3,7 +3,7 @@
 {% block body %}
 <h1>Address</h1>
 
-<form method="POST" action="{% url 'order '%}">
+<form method="POST" action="{% url 'order' %}">
 {% for add  in address %}
 {% csrf_token %}
 <div>

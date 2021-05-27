@@ -1,4 +1,4 @@
-from typing import get_origin
+from typing import AsyncGenerator, get_origin
 from django.contrib.auth import models
 from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib import messages
@@ -155,3 +155,15 @@ class Checkout(View):
             form.save()
         return redirect("checkout")
 
+class OrderView(View):
+    def post(self,*args, **kwargs):
+        address = Address.objects.get(user=self.request.user,pk=int(self.request.POST['address']))
+        order = Order.objects.get(user=self.request.user,ordered =False)
+        if address:
+            order.delivery_address = address
+            order.ordered = True
+            order.save()
+            for item in order.items.all():
+                item.ordered =True
+                item.save()
+        return redirect('home')
