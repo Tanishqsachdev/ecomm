@@ -5,7 +5,9 @@
 
 <form method='POST'>
 {% csrf_token %}
-{{form.as_p}}
-<input type='submit' name='Add' value='submit'>
+<div class="col-lg-6 form-group">
+    {{form}}
+</div>
+<input type='submit' name='Add' value='submit' class="btn btn-primary">
 </form>
 {% endblock body %}
