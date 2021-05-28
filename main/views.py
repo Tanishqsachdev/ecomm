@@ -158,6 +158,9 @@ class Checkout(View):
         return redirect("checkout")
 
 class OrderView(View):
+    def get(self,*args, **kwargs):
+        orders = Order.objects.filter(user=self.request.user,ordered=True)
+        return render(self.request,'main/orders.html',{'orders':orders})
     def post(self,*args, **kwargs):
         address = Address.objects.get(user=self.request.user,pk=int(self.request.POST['address']))
         order = Order.objects.get(user=self.request.user,ordered =False)
@@ -170,3 +173,4 @@ class OrderView(View):
                 item.ordered =True
                 item.save()
         return redirect('home')
+

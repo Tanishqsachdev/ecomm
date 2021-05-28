@@ -1,0 +1,14 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block body %}
+<h1>Orders</h1>
+{% for order  in orders  %}
+<h3>Order on {{order.order_placed}}</h3>
+{% if order.delivered %}
+<h4 class="alert alert-success">Delivered</h4>
+{% else %}
+<h4 class="alert alert-warning" style="display:inline-block">Yet to be Delivered.</h4>
+{% endif %}
+{% endfor %}
+{% endblock body %}

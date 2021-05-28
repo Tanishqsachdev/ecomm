@@ -64,6 +64,7 @@
                 <a class="nav-link dropdown-toggle" id="pagesDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{user.username}}</a>
                   <div class="dropdown-menu mt-3" aria-labelledby="pagesDropdown">
                   <a class="dropdown-item border-0 transition-link" href=" {% url 'view_address' %}">Address</a>
+                  <a class="dropdown-item border-0 transition-link" href="{% url 'order' %}">Orders</a>
                   {% comment %} <a class="dropdown-item border-0 transition-link" href="shop.html">Category</a>
                   <a class="dropdown-item border-0 transition-link" href="detail.html">Product detail</a>
                   <a class="dropdown-item border-0 transition-link" href="cart.html">Shopping cart</a> {% endcomment %}
