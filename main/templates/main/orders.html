@@ -4,7 +4,7 @@
 {% block body %}
 <h1>Orders</h1>
 {% for order  in orders  %}
-<h3>Order on {{order.order_placed}}</h3>
+<a href="{% url 'order_details' order.pk %}"><h3>Order on {{order.order_placed}}</h3></a>
 {% if order.delivered %}
 <h4 class="alert alert-success">Delivered</h4>
 {% else %}

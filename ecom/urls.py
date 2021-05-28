@@ -39,7 +39,7 @@ urlpatterns = [
     path('cart/del/<pk>', DeleteFromCart.as_view(),name='cart_del'),
     path('checkout/', Checkout.as_view(),name='checkout'),
     path('order/', OrderView.as_view(),name='order'),
-
+    path('order/<pk>', OrderDetails.as_view(),name='order_details'),
     
     
 ]

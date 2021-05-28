@@ -174,3 +174,7 @@ class OrderView(View):
                 item.save()
         return redirect('home')
 
+class OrderDetails(View):
+    def get(self,*args, **kwargs):
+        order = Order.objects.get(user=self.request.user,pk=kwargs['pk'])
+        return render(self.request,"main/order_details.html",{'order':order})
