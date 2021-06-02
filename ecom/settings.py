@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
-from local_settings import secretKey
+from local_settings import secretKey,email,gmail_password
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -56,7 +56,7 @@ ROOT_URLCONF = 'ecom.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR/'main/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -128,4 +128,9 @@ LOGIN_URL ='login'
 MEDIA_ROOT =  BASE_DIR/'static/products'
 MEDIA_URL = '/media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
-
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER=email
+EMAIL_HOST_PASSWORD=gmail_password
+EMAIL_PORT=587
+EMAIL_USE_TLS=True
