@@ -46,14 +46,14 @@
                   <!-- Link--><a class="nav-link active" href="{% url 'home' %}">Home</a>
                 </li>
                 <li class="nav-item">
-                  <!-- Link--><a class="nav-link" href="shop.html">Shop</a>
+                  <!-- Link--><a class="nav-link" href="{% url 'home' %}">Shop</a>
                 </li>
                 <li class="nav-item">
-                  <!-- Link--><a class="nav-link" href="detail.html">Product detail</a>
+                  <!-- Link--><a class="nav-link" href="{% url 'home' %}">Product detail</a>
                 </li>
-                <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" id="pagesDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
-                  <div class="dropdown-menu mt-3" aria-labelledby="pagesDropdown"><a class="dropdown-item border-0 transition-link" href="index.html">Homepage</a><a class="dropdown-item border-0 transition-link" href="shop.html">Category</a><a class="dropdown-item border-0 transition-link" href="detail.html">Product detail</a><a class="dropdown-item border-0 transition-link" href="{% url 'view_cart' %}">Shopping cart</a><a class="dropdown-item border-0 transition-link" href="checkout.html">Checkout</a></div>
-                </li>
+                {% comment %} <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" id="pagesDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
+                  <div class="dropdown-menu mt-3" aria-labelledby="pagesDropdown"><a class="dropdown-item border-0 transition-link" href="index.html">Homepage</a><a class="dropdown-item border-0 transition-link" href="shop.html">Category</a><a class="dropdown-item border-0 transition-link" href="detail.html">Product detail</a><a class="dropdown-item border-0 transition-link" href="{% url 'view_cart' %}">Shopping cart</a></div>
+                </li> {% endcomment %}
               </ul>
               <ul class="navbar-nav ml-auto">               
                 <li class="nav-item"><a class="nav-link" href="{% url 'view_cart' %}"> <i class="fas fa-dolly-flatbed mr-1 text-gray"></i>Cart<small class="text-gray">(2)</small></a></li>

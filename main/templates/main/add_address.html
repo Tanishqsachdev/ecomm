@@ -1,13 +1,67 @@
 {% extends 'main/base.html' %}
-
+{% load static %}
 {% block body %}
-<h1> Add Address </h1>
-
-<form method='POST'>
-{% csrf_token %}
-<div class="col-lg-6 form-group">
-    {{form}}
-</div>
-<input type='submit' name='Add' value='submit' class="btn btn-primary">
-</form>
+        <section class="py-5">
+          <!-- BILLING ADDRESS-->
+          <h2 class="h5 text-uppercase mb-4">Address details</h2>
+          <div class="row">
+            <div class="col-lg-8">
+              <form method="POST">
+              {% csrf_token %}
+                <div class="row">
+                  <div class="col-lg-6 form-group">
+                    <label class="text-small text-uppercase" for="firstName">First name</label>
+                    {{form.fname}}
+                    {% comment %} <input class="form-control form-control-lg" id="firstName" name="fname" type="text" placeholder="Enter your first name"> {% endcomment %}
+                  </div>
+                  <div class="col-lg-6 form-group">
+                    <label class="text-small text-uppercase" for="lastName">Last name</label>
+                    {{form.lname}}
+                    {% comment %} <input class="form-control form-control-lg" id="lastName" name="lname" type="text" placeholder="Enter your last name"> {% endcomment %}
+                  </div>
+                  <div class="col-lg-6 form-group">
+                    <label class="text-small text-uppercase" for="email">Email address</label>
+                    {{form.email}}
+                    {% comment %} <input class="form-control form-control-lg" id="email" name="email" type="email" placeholder="e.g. Jason@example.com"> {% endcomment %}
+                  </div>
+                  <div class="col-lg-6 form-group">
+                    <label class="text-small text-uppercase" for="phone">Phone number</label>
+                    {{form.phone_number}}
+                    {% comment %} <input class="form-control form-control-lg" id="phone" name="phone" type="tel" placeholder="e.g. +02 245354745"> {% endcomment %}
+                  </div>
+                  <div class="col-lg-6 form-group">
+                    <label class="text-small text-uppercase" for="Pincode">Pincode</label>
+                    {{form.pincode}}
+                    {% comment %} <input class="form-control form-control-lg" id="pincode" name="pincode" type="text" placeholder="Your Pincode"> {% endcomment %}
+                  </div>
+                  <div class="col-lg-12 form-group">
+                    <label class="text-small text-uppercase" for="address">Address line 1</label>
+                    {{form.add1}}
+                    {% comment %} <input class="form-control form-control-lg" id="address" name="add1" type="text" placeholder="House number and street name"> {% endcomment %}
+                  </div>
+                  <div class="col-lg-12 form-group">
+                    <label class="text-small text-uppercase" for="address">Address line 2</label>
+                    {{form.add2}}
+                    {% comment %} <input class="form-control form-control-lg" id="addressalt" name="add2" type="text" placeholder="Apartment, Suite, Unit, etc (optional)"> {% endcomment %}
+                  </div>
+                  <div class="col-lg-6 form-group">
+                    <label class="text-small text-uppercase" for="city">Town/City</label>
+                    {{form.city}}
+                    {% comment %} <input class="form-control form-control-lg" id="city" name="city" type="text"> {% endcomment %}
+                  </div>
+                  <div class="col-lg-6 form-group">
+                    <label class="text-small text-uppercase" for="state">State/County</label>
+                    {{form.state}}
+                    {% comment %} <input class="form-control form-control-lg" id="state" name="state" type="text"> {% endcomment %}
+                  </div>
+                  
+                  <div class="col-lg-12 form-group">
+                    <button class="btn btn-dark" type="submit" name="Add" value="submit">Save</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </section>
+      </div>
 {% endblock body %}

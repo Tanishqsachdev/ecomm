@@ -47,6 +47,14 @@ class AddAddress(CreateView):
     form_class = AddressForm
     success_url = reverse_lazy('view_address')
 
+    def form_valid(self, form):
+        """If the form is valid, save the associated model."""
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.save()
+        
+        return super().form_valid(form)
+
 class ViewAddress(ListView):
     template_name='main/view_address.html'
     context_object_name='address'
